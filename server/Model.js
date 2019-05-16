@@ -13,6 +13,9 @@ function readFile () {
 readFile()
 
 module.exports = {
+  emitModel () {
+    this.io.emit('model',this.getModel())
+  },
   saveSync () {
     console.log('Saving synchronously')//, JSON.stringify(modelState))
     let currentState = JSON.stringify(modelState, null, 2)
@@ -26,9 +29,18 @@ module.exports = {
   getTimestamp () {
     return Date.now()
   },
-  getModel () {
+  getModel (withEvents) {
     modelState.timestamp = Date.now()
-    return modelState
+    let responseData = { 
+      timestamp: modelState.timestamp,
+      topic: modelState.topic,
+      timer: modelState.timer,
+      fraktionen: modelState.fraktionen,
+    }
+    if(withEvents) {
+      responseData.events = modelState.events
+    }
+    return responseData
   },
   getFraktion (id) {
     return modelState.fraktionen.find((e) => { return e.id === id })
@@ -46,6 +58,7 @@ module.exports = {
     this.stopTimer()
     fraktion.speakingSince = this.getTimestamp()
     this.addEvent('start_speaking', fraktion.id)
+
   },
   stopTimer () {
     modelState.fraktionen.forEach((fraktion) => {
@@ -57,21 +70,38 @@ module.exports = {
         fraktion.speakingSince = null
         this.addEvent('stop_speaking',fraktion.id,{ oldTime: timeElapsedBefore, timeSpoken: timeSpoken, newTime: fraktion.timeElapsed })
       } 
-       
     })
   },
   startCountdown (seconds) {
     this.addEvent('start_countdown',null, {})
     modelState.timer.runningSince = this.getTimestamp()
     modelState.timer.durationSeconds = seconds
+
   },
   stopCountdown () {
     this.addEvent('stop_countdown',null, {})
     modelState.timer.runningSince = null
+
+  },
+  setTopic (topic) {
+    this.addEvent('set_topic', null, { topic: topic})
+    modelState.topic = topic
+
+  },
+  reset () {
+    modelState.fraktionen.forEach((fraktion) => {
+      fraktion.speakingSince = null;
+      fraktion.timeElapsed = 0;
+    })
+    modelState.timer.runningSince = 0;
+    modelState.timer.durationSeconds = 0;
+    modelState.events = [];
+    this.addEvent('reset',null,null)
   },
   addEvent (type, fraktion, message) {
     let event = { timestamp: Date.now(), type: type, fraktion: fraktion, message: message || '' }
     modelState.events.push(event)
     console.log(JSON.stringify(event,null,0))
+    this.emitModel()
   }
 }

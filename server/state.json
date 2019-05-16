@@ -1,8 +1,8 @@
 {
-  "timestamp": 1558009635656,
-  "topic": "",
+  "timestamp": 1558018159265,
+  "topic": "ermagerd",
   "timer": {
-    "runningSince": null,
+    "runningSince": 0,
     "durationSeconds": 0
   },
   "fraktionen": [
@@ -54,30 +54,30 @@
   ],
   "events": [
     {
-      "timestamp": 1558010956360,
-      "type": "server_start",
+      "timestamp": 1558018128600,
+      "type": "reset",
       "fraktion": null,
-      "message": "listening on *:3000"
+      "message": ""
     },
     {
-      "timestamp": 1558011016361,
+      "timestamp": 1558018140091,
       "type": "autosave",
       "fraktion": null,
       "message": {}
     },
     {
-      "timestamp": 1558011053312,
+      "timestamp": 1558018159259,
       "type": "stop_server",
       "fraktion": null,
       "message": {
         "options": {
           "exit": true
         },
-        "exitCode": {}
+        "exitCode": "SIGINT"
       }
     },
     {
-      "timestamp": 1558011053319,
+      "timestamp": 1558018159265,
       "type": "stop_server",
       "fraktion": null,
       "message": {
@@ -86,18 +86,6 @@
         },
         "exitCode": 0
       }
-    },
-    {
-      "timestamp": 1558011177546,
-      "type": "server_start",
-      "fraktion": null,
-      "message": "listening on *:3000"
-    },
-    {
-      "timestamp": 1558011237548,
-      "type": "autosave",
-      "fraktion": null,
-      "message": {}
     }
   ]
 }

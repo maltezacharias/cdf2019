@@ -30,15 +30,23 @@ process.on('uncaughtException', exitHandler.bind(null, { exit: true }))
 
 const app = express()
 const cacheHeaders = require('express-cache-headers');
+app.use(cacheHeaders({ ttl: 0, nocache: true }))
 const http = require('http').createServer(app)
+const io = require('socket.io')(http);
 app.locals.model = model;
+model.io = io;
+app.locals.io = io;
 routes.forEach((route) =>  { app.get(route.path, route.handler ) })
 app.use(express.static(publicPath))
-app.use(cacheHeaders)
+
 
 http.listen(3000, function () {
   model.addEvent('server_start', null, 'listening on *:3000')
 })
+
+io.on('connection', function(socket){
+  console.log('WebSocket: User connected');
+});
 
 // Schedule auto-save
 setInterval(() => {

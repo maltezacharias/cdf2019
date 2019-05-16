@@ -3,7 +3,6 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="styles.css?v=1.0">
   <style type="text/css">
 	body {
 		margin:0;
@@ -27,9 +26,129 @@
 		display:none;
 	}
 
-  </style>
+
+	#svgBoxes g.fraktion.active text {
+		animation: blinker 2s linear infinite;
+		fill: rgb(255,255,255);
+	}
+
+	@keyframes blinker {
+ 		50% {
+    		opacity: 0.5;
+  		}
+	}
+
+	#centerpoint {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+	}
+
+
+	#countdown {
+		position:relative;
+		width: 600px;
+    margin-left: -300px;
+    height: 400px;
+    margin-top: -200px;	
+
+		vertical-align:middle;
+		text-align:center;
+		font-family:'TradeGothic-BoldCondTwenty', 'TradeGothic';
+		font-weight:boldest;
+		font-size:200px;
+		opacity:0.8;
+		background-color:black;
+		color:white;
+		display:none;
+		border-radius: 5px 5px 5px 5px;
+	}
+
+	</style>
+	<script src="/js/socket.io.js"></script>
+	<script type="text/javascript">
+	const socket = io();
+	const scripting = {
+		fraktionen: [],
+		countdown: { durationSeconds: 0, runningSince: null },
+		ready () {
+			socket.on('model', (model) => {
+				this.onModel(model)
+			})
+			fetch('/model')
+				.then((response) => {
+   	 			return response.json()
+  			})
+  			.then((myJson) => {
+    			this.onModel(myJson)
+				});
+				
+				window.setInterval(() => { this.timeLoop() },200)
+		},
+		onModel (model) {
+			console.log("Model received", model)
+			if ( model.topic ) this.setTitel( model.topic.line1 || '', model.topic.line2 || '')
+			if ( model.fraktionen ) this.setFraktionen(model.fraktionen)
+			if ( model.timer ) this.setTimer(model.timer)
+		},
+		setTitel (line1, line2) {
+			document.getElementById('titel1').textContent = line1
+			document.getElementById('titel2').textContent = line2
+		},
+		setFraktionen (fraktionen) {
+			this.fraktionen = fraktionen;
+		},
+		setTimer(timer) {
+			this.countdown = timer;
+		},
+		setFraktion (place, fraktion) {
+			let groupId = 'fraktion'+place
+			let logoId = 'logo'+place
+			let timerId = 'timer'+place
+
+			let groupE = document.getElementById(groupId)
+	
+			if (!fraktion) {
+				groupE.classList.add('disabled');
+				return
+			} else {
+				groupE.classList.remove('disabled');
+			}
+	
+			let logoE = document.getElementById(logoId)
+			let timerE = document.getElementById(timerId)
+
+			logoE.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '#'+fraktion.id);
+			let totalTime = fraktion.timeElapsed + ( fraktion.speakingSince ? Date.now() - fraktion.speakingSince : 0 )
+			let minutes = Math.floor( totalTime / 1000 / 60 )
+			let seconds = Math.round(( totalTime / 1000 ) - minutes * 60);
+			timerE.textContent = (minutes < 10 ? '0' + minutes : minutes) + ':' + ( seconds < 10 ? '0' + seconds : seconds )
+
+		},
+		timeLoop () {
+			let places = [1,2,3,4,5,6]
+			this.fraktionen.forEach( (fraktion) => {
+				places = places.filter((place) => { return place !== fraktion.place }) // remove
+				this.setFraktion(fraktion.place, fraktion)
+			})
+			places.forEach((place) => {
+				this.setFraktion(place, false) // disable
+			})
+		}
+	}
+
+	if (document.readyState !== 'loading') {
+		scripting.ready()
+	} else {
+		document.addEventListener('DOMContentLoaded', () => { scripting.ready() } )
+	}
+
+	</script>
 </head>
 <body>
+		<div id="centerpoint">
+			<div id="countdown"><span style="display:block; line-height: 400px;" id="countdownTime">00:00</span></div>
+		</div>
 		<svg width="100%" height="100%" viewBox="0 0 1920 1080" version="1.1" 
 		xmlns="http://www.w3.org/2000/svg" 
 		xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" 
@@ -309,10 +428,10 @@
 			<path id="moderation" d="M1084.48,642.308c0,-10.48 -8.509,-18.988 -18.988,-18.988l-210.988,0c-10.479,0 -18.988,8.508 -18.988,18.988l0,151.904c0,10.48 8.509,18.988 18.988,18.988l210.988,0c10.479,0 18.988,-8.508 18.988,-18.988l0,-151.904Z" style="fill:#fff;fill-opacity:0.345098;"/>
 		</g>
 		<g id="svgBoxes">
-			<g id="fraktion1" class="fraktion disabled">
+			<g id="fraktion1" class="fraktion">
 				<rect x="34.411" y="824.572" width="248.963" height="189.88"/>
-				<text x="110.94px" y="997.828px" >00:00</text>
-				<use xlink:href="#junos" x="0" y="0" width="1000px" height="500px" transform="matrix(1.00202,0,0,0.997662,44.1612,837.687)"/>		
+				<text id="timer1" x="110.94px" y="997.828px" >00:00</text>
+				<use id="logo1" xlink:href="#junos" x="0" y="0" width="1000px" height="500px" transform="matrix(1.00202,0,0,0.997662,44.1612,837.687)"/>		
 			</g>
 	
 			<g id="fraktion2" class="fraktion">
@@ -353,9 +472,9 @@
 				<text x="962.896px" y="545.226px" style="font-family:'TradeGothic-BoldCondTwenty', 'TradeGothic';font-weight:700;font-size:24px;fill:#fff;">Moderation</text>
 			</g>
 		</g>
-		<g id="thema" transform="matrix(1,0,0,1,136.311,25.3125)">
-			<text x="279.321px" y="378.298px" style="font-family:'TradeGothic-BoldCondTwenty', 'TradeGothic';font-weight:700;font-size:96px;fill:#fff;fill-opacity:0.443137;">Aktuelles Themengebiet kommt</text>
-			<text x="511.257px" y="474.298px" style="font-family:'TradeGothic-BoldCondTwenty', 'TradeGothic';font-weight:700;font-size:96px;fill:#fff;fill-opacity:0.443137;">hier zweizeilig hin</text>
+		<g id="thema">
+			<text id="titel1" x="50%" y="378.298px" style="text-anchor:middle; font-family:'TradeGothic-BoldCondTwenty', 'TradeGothic';font-weight:700;font-size:96px;fill:#fff;fill-opacity:0.443137;"></text>
+			<text id="titel2" x="50%" y="474.298px" style="text-anchor:middle; font-family:'TradeGothic-BoldCondTwenty', 'TradeGothic';font-weight:700;font-size:96px;fill:#fff;fill-opacity:0.443137;"></text>
 		</g>
 		<defs>
 	

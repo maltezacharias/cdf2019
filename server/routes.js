@@ -6,6 +6,9 @@ module.exports = {
     { path: '/save', handler: require('./actions/save') },
     { path: '/stop', handler: require('./actions/stop') },
     { path: '/countdown', handler: require('./actions/countdown') },
-    // { path: '', handler: require(./actions/) },
+    { path: '/topic', handler: require('./actions/topic') },
+    { path: '/resetAllAndEverything', handler: require('./actions/reset') },
+
+    // { path: '', handler: require('./actions/') },
   ]
 }
