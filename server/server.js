@@ -1,7 +1,9 @@
 'use strict'
-
+const path = require('path')
+const express = require('express')
 const model = require('./Model')
 const routes = require('./routes').routes
+const publicPath = path.join(__dirname, '../public')
 
 function exitHandler (options, exitCode) {
   if (options.cleanup) console.log('Clean Shutdown')
@@ -26,10 +28,13 @@ process.on('SIGUSR2', exitHandler.bind(null, { exit: true }))
 // catches uncaught exceptions
 process.on('uncaughtException', exitHandler.bind(null, { exit: true }))
 
-const app = require('express')()
+const app = express()
+const cacheHeaders = require('express-cache-headers');
 const http = require('http').createServer(app)
 app.locals.model = model;
 routes.forEach((route) =>  { app.get(route.path, route.handler ) })
+app.use(express.static(publicPath))
+app.use(cacheHeaders)
 
 http.listen(3000, function () {
   model.addEvent('server_start', null, 'listening on *:3000')

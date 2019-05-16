@@ -1,5 +1,6 @@
 {
   "timestamp": 1558009635656,
+  "topic": "",
   "timer": {
     "runningSince": null,
     "durationSeconds": 0
@@ -51,5 +52,52 @@
       "timeElapsed": 0
     }
   ],
-  "events": [  ]
+  "events": [
+    {
+      "timestamp": 1558010956360,
+      "type": "server_start",
+      "fraktion": null,
+      "message": "listening on *:3000"
+    },
+    {
+      "timestamp": 1558011016361,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558011053312,
+      "type": "stop_server",
+      "fraktion": null,
+      "message": {
+        "options": {
+          "exit": true
+        },
+        "exitCode": {}
+      }
+    },
+    {
+      "timestamp": 1558011053319,
+      "type": "stop_server",
+      "fraktion": null,
+      "message": {
+        "options": {
+          "cleanup": true
+        },
+        "exitCode": 0
+      }
+    },
+    {
+      "timestamp": 1558011177546,
+      "type": "server_start",
+      "fraktion": null,
+      "message": "listening on *:3000"
+    },
+    {
+      "timestamp": 1558011237548,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    }
+  ]
 }
