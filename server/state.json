@@ -1,0 +1,51 @@
+{
+  "timestamp": null,
+  "fraktionen": [
+    {
+      "id": "junos",
+      "place": 1,
+      "logo": "logos/junos.png",
+      "name": "JUNOS",
+      "color": "#E84188",
+      "speakingSince": null,
+      "timeElapsed": 0
+    },
+    {
+      "id": "rfs",
+      "place": 2,
+      "logo": "logos/rfs.png",
+      "name": "RFS",
+      "color": "#074DA2",
+      "speakingSince": null,
+      "timeElapsed": 0
+    },
+    {
+      "id": "ufmuw",
+      "place": 3,
+      "logo": "logos/ufmuw.png",
+      "name": "UFMUW",
+      "color": "#98304f",
+      "speakingSince": null,
+      "timeElapsed": 0
+    },
+    {
+      "id": "vsstoe",
+      "place": 4,
+      "logo": "logos/vsstoe.png",
+      "name": "VSSTÖ",
+      "color": "#B0182B",
+      "speakingSince": null,
+      "timeElapsed": 0
+    },
+    {
+      "id": "wum",
+      "place": 5,
+      "logo": "logos/wum.png",
+      "name": "WUM",
+      "color": "#ee8265",
+      "speakingSince": null,
+      "timeElapsed": 0
+    }
+  ],
+  "events": []
+}
