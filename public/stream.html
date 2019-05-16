@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="styles.css?v=1.0">
+  <style type="text/css">
+	body {
+		margin:0;
+		padding:0;
+		overflow: hidden;
+		background-color:rgba(0,0,0,0);
+		font-family:'TradeGothic-BoldCondTwenty', 'TradeGothic';
+		font-weight:700;
+		font-size:20pt;
+	}
+
+	.flex-container{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: space-evenly;
+		width:100%;
+		margin:0.2em 0;
+		padding-top:0.5em;
+		border-top:2px solid #cecece;
+	}
+
+	.flex-container div {
+		flex-grow: 1;
+		text-align: center;
+		color:#ffffff;
+	}
+
+	.flex-container div.fraktion::before {
+		content: "⬤";
+		color: rgba(0,0,0,0);
+	}
+
+
+	.flex-container div.active::before {
+		animation: blinker 4s linear infinite;
+		color: rgb(255,0,0);
+	}
+
+	@keyframes blinker {
+ 		50% {
+    		opacity: 0;
+  		}
+	}
+	.flex-container div:first-child {
+		font-family:"xenosphere";
+		flex-grow: "5";
+		text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
+	}
+
+	.rfs {
+		background-color:#074DA2;
+	}
+
+	.junos {
+		background-color: #E84188;
+	}
+
+	.ufmuw {
+		background-color: #98304f;
+	}
+
+	.vsstoe {
+		background-color: #B0182B;
+	}
+
+	.wum {
+		background-color: #F27F60;
+	}
+
+	.flex-container div span {
+		padding:0.1em 0.4em;
+	}
+
+  </style>
+</head>
+
+<body>
+	<div class="flex-container">
+		<div>
+			Clash der Fraktionen
+		</div>
+		<div class="fraktion">
+				<span class="junos">JUNOS 0:00 min</span>
+		</div>
+		<div class="fraktion">
+				<span class="rfs">RFS 0:00 min</span>
+		</div>
+		<div class="fraktion">
+				<span class="ufmuw">UFMUW 0:00 min</span>
+		</div>
+		<div class="active fraktion">
+				<span class="vsstoe">VSSTOE 0:00 min</span>
+		</div>
+		<div class="fraktion">
+				<span class="wum">WUM 0:00 min</span>
+		</div>
+	</div>
+</body>
+</html>
