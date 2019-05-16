@@ -1,6 +1,7 @@
 'use strict'
 
 const model = require('./Model')
+const routes = require('./routes').routes
 
 function exitHandler (options, exitCode) {
   if (options.cleanup) console.log('Clean Shutdown')
@@ -24,13 +25,10 @@ process.on('uncaughtException', exitHandler.bind(null, { exit: true }))
 
 const app = require('express')()
 const http = require('http').createServer(app)
-
-app.get('/', function (req, res) {
-  let modelData = model.getModel()
-  res.json(modelData)
-})
+app.locals.model = model;
+console.log(routes);
+routes.forEach((route) =>  { app.get(route.path, route.handler ) })
 
 http.listen(3000, function () {
-  console.log('listening on *:3000')
-  model.addEvent('server_start', null)
+  model.addEvent('server_start', null, 'listening on *:3000')
 })

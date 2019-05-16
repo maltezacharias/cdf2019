@@ -1,5 +1,9 @@
 {
   "timestamp": null,
+  "timer": {
+    "runningSince": null,
+    "durationSeconds": 0
+  },
   "fraktionen": [
     {
       "id": "junos",
