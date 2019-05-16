@@ -3,18 +3,38 @@ const path = require('path')
 const fs = require('fs')
 var modelState = {}
 
-fs.readFile(path.join(__dirname, '/state.json'), (err, data) => {
-  if (err) throw err
+function readFile () {
+  let data = fs.readFileSync(path.join(__dirname, '/state.json'), 'utf8')
   modelState = JSON.parse(data)
   console.log('Read Model', modelState)
-})
+}
+
+readFile()
 
 module.exports = {
   saveSync () {
-    console.log('Saving synchronously')
+    console.log('Saving synchronously', JSON.stringify(modelState))
+  },
+  getTimestamp () {
+    return Date.now()
   },
   getModel () {
-    modelState.timestamp = Date.now().getTime()
+    modelState.timestamp = Date.now()
     return modelState
+  },
+  getFraktion (id) {
+    return modelState.fraktionen.find((e) => { return e.id === id })
+  },
+  startTimer (id) {
+    this.stopTimer()
+    let fraktion = this.getFraktion(id)
+  },
+  stopTimer () {
+    modelState.fraktionen.forEach((fraktion) => { fraktion.speakingSince = null })
+  },
+  addEvent (type, fraktion, message) {
+    let event = { timestamp: Date.now(), type: type, fraktion: fraktion, message: message || '' }
+    modelState.events.push(event)
+    console.log(event)
   }
 }

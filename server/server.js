@@ -27,8 +27,12 @@ const http = require('http').createServer(app)
 
 app.get('/', function (req, res) {
   res.send('<h1>Hello world</h1>')
+  let modelData = model.getModel()
+  res.send(modelData)
+  modelData.fraktionen
 })
 
 http.listen(3000, function () {
   console.log('listening on *:3000')
+  model.addEvent('server_start', null)
 })
