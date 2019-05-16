@@ -6,7 +6,10 @@ const routes = require('./routes').routes
 function exitHandler (options, exitCode) {
   if (options.cleanup) console.log('Clean Shutdown')
   if (exitCode || exitCode === 0) console.log('Process killed or exception', exitCode)
+
+  model.addEvent('stop_server',null,{ options: options, exitCode: exitCode })
   model.saveSync()
+  
   if (options.exit) process.exit()
 }
 
@@ -26,9 +29,14 @@ process.on('uncaughtException', exitHandler.bind(null, { exit: true }))
 const app = require('express')()
 const http = require('http').createServer(app)
 app.locals.model = model;
-console.log(routes);
 routes.forEach((route) =>  { app.get(route.path, route.handler ) })
 
 http.listen(3000, function () {
   model.addEvent('server_start', null, 'listening on *:3000')
 })
+
+// Schedule auto-save
+setInterval(() => {
+  model.addEvent('autosave',null,{})
+  model.save(() => {})
+},60000)

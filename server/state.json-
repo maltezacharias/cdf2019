@@ -1,5 +1,5 @@
 {
-  "timestamp": 1558009635656,
+  "timestamp": null,
   "timer": {
     "runningSince": null,
     "durationSeconds": 0
@@ -51,5 +51,5 @@
       "timeElapsed": 0
     }
   ],
-  "events": [  ]
+  "events": []
 }
