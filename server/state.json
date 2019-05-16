@@ -1,5 +1,5 @@
 {
-  "timestamp": 1558018159265,
+  "timestamp": 1558021108429,
   "topic": "ermagerd",
   "timer": {
     "runningSince": 0,
@@ -13,7 +13,7 @@
       "name": "JUNOS",
       "color": "#E84188",
       "speakingSince": null,
-      "timeElapsed": 0
+      "timeElapsed": 31803
     },
     {
       "id": "rfs",
@@ -21,7 +21,7 @@
       "logo": "logos/rfs.png",
       "name": "RFS",
       "color": "#074DA2",
-      "speakingSince": null,
+      "speakingSince": 1558020820651,
       "timeElapsed": 0
     },
     {
@@ -31,7 +31,7 @@
       "name": "UFMUW",
       "color": "#98304f",
       "speakingSince": null,
-      "timeElapsed": 0
+      "timeElapsed": 316571
     },
     {
       "id": "vsstoe",
@@ -40,7 +40,7 @@
       "name": "VSSTÖ",
       "color": "#B0182B",
       "speakingSince": null,
-      "timeElapsed": 0
+      "timeElapsed": 2791
     },
     {
       "id": "wum",
@@ -49,7 +49,7 @@
       "name": "WUM",
       "color": "#ee8265",
       "speakingSince": null,
-      "timeElapsed": 0
+      "timeElapsed": 2491
     }
   ],
   "events": [
@@ -86,6 +86,172 @@
         },
         "exitCode": 0
       }
+    },
+    {
+      "timestamp": 1558020208381,
+      "type": "server_start",
+      "fraktion": null,
+      "message": "listening on *:3000"
+    },
+    {
+      "timestamp": 1558020268387,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020328392,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020388403,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020448415,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020466992,
+      "type": "start_speaking",
+      "fraktion": "junos",
+      "message": ""
+    },
+    {
+      "timestamp": 1558020498795,
+      "type": "stop_speaking",
+      "fraktion": "junos",
+      "message": {
+        "oldTime": 0,
+        "timeSpoken": 31803,
+        "newTime": 31803
+      }
+    },
+    {
+      "timestamp": 1558020498796,
+      "type": "start_speaking",
+      "fraktion": "ufmuw",
+      "message": ""
+    },
+    {
+      "timestamp": 1558020508423,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020568423,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020628423,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020688423,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020748425,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020808425,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020815367,
+      "type": "stop_speaking",
+      "fraktion": "ufmuw",
+      "message": {
+        "oldTime": 0,
+        "timeSpoken": 316571,
+        "newTime": 316571
+      }
+    },
+    {
+      "timestamp": 1558020815368,
+      "type": "start_speaking",
+      "fraktion": "wum",
+      "message": ""
+    },
+    {
+      "timestamp": 1558020817859,
+      "type": "stop_speaking",
+      "fraktion": "wum",
+      "message": {
+        "oldTime": 0,
+        "timeSpoken": 2491,
+        "newTime": 2491
+      }
+    },
+    {
+      "timestamp": 1558020817859,
+      "type": "start_speaking",
+      "fraktion": "vsstoe",
+      "message": ""
+    },
+    {
+      "timestamp": 1558020820650,
+      "type": "stop_speaking",
+      "fraktion": "vsstoe",
+      "message": {
+        "oldTime": 0,
+        "timeSpoken": 2791,
+        "newTime": 2791
+      }
+    },
+    {
+      "timestamp": 1558020820651,
+      "type": "start_speaking",
+      "fraktion": "rfs",
+      "message": ""
+    },
+    {
+      "timestamp": 1558020868426,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020928427,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558020988427,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558021048428,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
+    },
+    {
+      "timestamp": 1558021108428,
+      "type": "autosave",
+      "fraktion": null,
+      "message": {}
     }
   ]
 }
