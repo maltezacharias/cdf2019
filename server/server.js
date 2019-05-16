@@ -26,10 +26,8 @@ const app = require('express')()
 const http = require('http').createServer(app)
 
 app.get('/', function (req, res) {
-  res.send('<h1>Hello world</h1>')
   let modelData = model.getModel()
-  res.send(modelData)
-  modelData.fraktionen
+  res.json(modelData)
 })
 
 http.listen(3000, function () {

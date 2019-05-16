@@ -28,6 +28,12 @@ module.exports = {
   startTimer (id) {
     this.stopTimer()
     let fraktion = this.getFraktion(id)
+    if (!fraktion) {
+      console.log('Can\'t start timer for non existing fraktion ', id)
+      return
+    }
+    fraktion.speakingSince = this.getTimestamp()
+    this.addEvent('start_speaking', fraktion.id)
   },
   stopTimer () {
     modelState.fraktionen.forEach((fraktion) => { fraktion.speakingSince = null })
